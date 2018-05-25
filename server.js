@@ -2,15 +2,14 @@ const {createServer} = require("http");
 const mime = require("mime");
 const {parse} = require("url");
 const {resolve} = require("path");
-let {readFile} = require("fs");
-
+const {readFile} = require("fs");
 
 const baseDirectory = process.cwd();
 
 
-let server = createServer((request, response) => {
-  let path = urlPath(request.url);
-  let type = mime.getType(path);
+createServer((request, response) => {
+  const path = urlPath(request.url);
+  const type = mime.getType(path);
   response.writeHead(200, {"Content-Type": type});
   readFile(path, "utf8", (error, text) => {
     if (error) throw error;
@@ -20,8 +19,8 @@ let server = createServer((request, response) => {
 
 
 function urlPath(url) {
-  let {pathname} = parse(url);
-  let path = resolve(decodeURIComponent(pathname).slice(1));
+  const {pathname} = parse(url);
+  const path = resolve(decodeURIComponent(pathname).slice(1));
   if (path != baseDirectory &&
       !path.startsWith(baseDirectory + "/")) {
     throw {status: 403, body: "Forbidden"};
