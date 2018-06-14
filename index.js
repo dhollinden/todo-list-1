@@ -1,7 +1,7 @@
 let list = document.querySelector("select");
 let note = document.querySelector("textarea");
-
 let state;
+
 function setState(newState) {
     list.textContent = "";
     for (let name of Object.keys(newState.notes)) {
@@ -28,7 +28,7 @@ list.addEventListener("change", () => {
 note.addEventListener("change", () => {
     setState({
         notes: Object.assign({}, state.notes, {[state.selected]: note.value}),
-      selected: state.selected
+        selected: state.selected
     });
 });
 
