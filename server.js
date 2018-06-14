@@ -21,7 +21,7 @@ createServer((request, response) => {
 function urlPath(url) {
   const {pathname} = parse(url);
   const path = resolve(decodeURIComponent(pathname).slice(1));
-  if (path != baseDirectory &&
+  if (path !== baseDirectory &&
       !path.startsWith(baseDirectory + "/")) {
     throw {status: 403, body: "Forbidden"};
   }
